@@ -1,0 +1,34 @@
+package app;
+
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+import dao.CourseDAO;
+import dao.DepartmentDAO;
+import dao.StudentDAO;
+import entities.Student;
+import services.CourseService;
+import services.DepartmentService;
+import services.StudentService;
+
+public class Client {
+
+	public static void main(String[] args) throws MalformedURLException, RemoteException, NotBoundException, ClassNotFoundException {
+		// Getting the registry
+		Registry registry = LocateRegistry.getRegistry("127.0.0.1", 2005);
+		
+		CourseDAO courseService = (CourseDAO) registry.lookup("CourseService");
+		StudentDAO studentService = (StudentDAO) registry.lookup("StudentService");
+		DepartmentDAO departmentService = (DepartmentDAO) registry.lookup("DepartmentService");
+
+		departmentService.findDepartmentNotOwnerCourse().forEach(x -> System.out.println(x));
+
+		studentService.findAll().forEach(x -> System.out.println(x));
+
+	}
+
+}

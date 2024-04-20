@@ -1,0 +1,34 @@
+package app;
+
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+import entities.Student;
+import services.CourseService;
+import services.DepartmentService;
+import services.StudentService;
+
+public class Client {
+
+	public static void main(String[] args) throws MalformedURLException, RemoteException, NotBoundException, ClassNotFoundException {
+
+		final String URL = "rmi://localhost:2004/";
+
+		// Getting the registry
+		Registry registry = LocateRegistry.getRegistry("192.168.1.11", 2005);
+		
+		CourseService courseService = (CourseService) registry.lookup("CourseService");
+		StudentService studentService = (StudentService) registry.lookup("StudentService");
+		DepartmentService departmentService = (DepartmentService) registry.lookup("DepartmentService");
+
+		departmentService.findDepartmentNotOwnerCourse().forEach(x -> System.out.println(x));
+
+		studentService.findAll().forEach(x -> System.out.println(x));
+
+	}
+
+}

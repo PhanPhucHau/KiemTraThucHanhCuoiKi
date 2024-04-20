@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="dao.CourseDAO"/>
+    <fullyQualifiedTypeName name="dao.DepartmentDAO"/>
+    <fullyQualifiedTypeName name="dao.StudentDAO"/>
+    <fullyQualifiedTypeName name="java.rmi.Naming"/>
+</qualifiedTypeNameHistroy>
